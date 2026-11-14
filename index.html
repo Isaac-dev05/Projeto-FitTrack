@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FitTrack</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="console.js"></script>
+    <link rel="stylesheet" href="css/tracker.css">
+    <script src="console.js" defer></script>
+    <script src="tracker.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -15,6 +17,7 @@
 </head>
 
 <body>
+    <a href="#meus-treinos" class="skip-link">Pular para meus treinos</a>
     <header id="header">
         <nav>
             <div class="logo">
@@ -22,7 +25,8 @@
             </div>
 
             <div id="menu">
-                <a href="index.html">Inicio</a>
+                <a href="index.html">Início</a>
+                <a href="index.html#meus-treinos">Meus treinos</a>
                 <a href="#sobre">Sobre</a>
                 <a href="#recursos">Recursos</a>
                 <a href="Contato.html">Contato</a>
@@ -32,25 +36,61 @@
         </nav>
     </header>
 
-    <section class="slider">
+    <main id="meus-treinos" class="tracker">
+        <div class="tracker-heading">
+            <div><p class="eyebrow">Um treino de cada vez</p><h1>Sua rotina. Seu progresso.</h1><p>Registre o que fez hoje e acompanhe sua constância.</p></div>
+            <a class="btn" href="#workout-form">+ Registrar treino</a>
+        </div>
+        <div class="tracker-grid">
+            <section class="tracker-card">
+                <h2>Meu diário de treinos</h2><p>Os dados ficam neste navegador, sem precisar de conta.</p>
+                <form id="workout-form">
+                    <label for="workout-name">Nome do treino</label><input id="workout-name" maxlength="80" required placeholder="Ex.: Treino A — pernas">
+                    <div class="form-row">
+                        <div><label for="workout-date">Data</label><input id="workout-date" type="date" required></div>
+                        <div><label for="workout-minutes">Duração (minutos)</label><input id="workout-minutes" type="number" min="1" max="300" step="1" value="45" required></div>
+                    </div>
+                    <button class="btn" type="submit">Salvar treino</button>
+                </form>
+                <div class="history"><h2>Histórico</h2><p id="empty-history">Seu primeiro treino começa este histórico. Registre acima!</p><ul id="workout-list"></ul></div>
+            </section>
+            <div>
+                <section class="tracker-card tracker-summary">
+                    <h2>Seu ritmo da semana</h2><p>De segunda a domingo. Cada dia conta uma vez.</p>
+                    <div class="stats"><div><strong id="week-count">0</strong><span>dias de treino na semana</span></div><div><strong id="total-minutes">0</strong><span>minutos no histórico</span></div></div>
+                    <label for="goal">Meta de dias por semana</label><select id="goal"><option value="1">1 dia</option><option value="2">2 dias</option><option value="3" selected>3 dias</option><option value="4">4 dias</option><option value="5">5 dias</option><option value="6">6 dias</option><option value="7">7 dias</option></select>
+                    <progress id="week-progress" value="0" max="3" aria-label="Progresso da meta semanal"></progress><p id="goal-summary"></p>
+                </section>
+                <section class="tracker-card timer-card">
+                    <h2>Hora de respirar</h2><p>Controle seu intervalo entre as séries.</p>
+                    <label for="rest-duration">Tempo de descanso</label><select id="rest-duration"><option value="30">30 segundos</option><option value="60" selected>1 minuto</option><option value="90">1 minuto e 30 segundos</option><option value="120">2 minutos</option></select>
+                    <output id="timer-display" aria-label="Tempo restante" aria-live="off">01:00</output><div class="timer-actions"><button id="timer-toggle" class="btn" type="button">Iniciar</button><button id="timer-reset" class="secondary-btn" type="button">Reiniciar</button></div>
+                </section>
+            </div>
+        </div>
+        <p id="tracker-status" role="status" aria-live="polite"></p>
+        <noscript>Ative o JavaScript para registrar treinos e usar o cronômetro.</noscript>
+    </main>
+
+    <section class="slider" aria-label="Conheça o FitTrack">
         <div class="slider-wrapper">
             <div class="slide">
-                <img src="img/dashboardslide.png">
+                <img src="img/dashboardslide.png" alt="Recursos e rotina de treinos no FitTrack" loading="lazy">
             </div>
             <div class="slide">
-                <img src="img/mulherslide.png">
+                <img src="img/mulherslide.png" alt="Recursos e rotina de treinos no FitTrack" loading="lazy">
             </div>
             <div class="slide">
-                <img src="img/exercicioslide.png">
+                <img src="img/exercicioslide.png" alt="Recursos e rotina de treinos no FitTrack" loading="lazy">
             </div>
             <div class="slide">
-                <img src="img/graficoslide.png">
+                <img src="img/graficoslide.png" alt="Recursos e rotina de treinos no FitTrack" loading="lazy">
             </div>
             <div class="slide">
-                <img src="img/comidaslide.png">
+                <img src="img/comidaslide.png" alt="Recursos e rotina de treinos no FitTrack" loading="lazy">
             </div>
              <div class="slide">
-                <img src="img/relogioslide.png">
+                <img src="img/relogioslide.png" alt="Recursos e rotina de treinos no FitTrack" loading="lazy">
             </div>
         </div>
     </section>
@@ -95,7 +135,7 @@
                             objetivos.</span></li>
                     <li><strong>Metas personalizadas</strong><span>Defina prioridades e acompanhe cada conquista.</span>
                     </li>
-                    <li><strong>Motivação diária</strong><span>Mantenha o foco com lembretes e histórico de
+                    <li><strong>Motivação diária</strong><span>Mantenha o foco com metas e histórico de
                             treinos.</span></li>
                 </ul>
                 <img class="img-post1" src="img/painel.png" alt="Visão geral do aplicativo FitTrack">
@@ -119,13 +159,13 @@
             <article class="post">
                 <h2>Três passos para começar</h2>
                 <ol class="feature-list">
-                    <li><strong>Cadastre-se</strong><span>Crie sua conta em poucos minutos.</span></li>
+                    <li><strong>Registre seu treino</strong><span>Comece sem conta, direto neste navegador.</span></li>
                     <li><strong>Monte sua rotina</strong><span>Organize seus treinos conforme seus objetivos.</span>
                     </li>
                     <li><strong>Evolua diariamente</strong><span>Acompanhe seu desempenho e celebre cada
                             conquista.</span></li>
                 </ol>
-                <a href="cadastro.html" class="btn">Começar Gratuitamente</a>
+                <a href="#meus-treinos" class="btn">Começar Gratuitamente</a>
                 <img class="img-post1" src="img/passos.png" alt="Passo a passo do cadastro">
             </article>
 
@@ -133,7 +173,7 @@
                 <h2>Sua evolução começa hoje!</h2>
                 <p>Não espere a motivação aparecer. Organize seus treinos, acompanhe seus resultados e transforme a
                     disciplina em hábito.</p>
-                <a href="cadastro.html" class="btn">Começar Agora</a>
+                <a href="#meus-treinos" class="btn">Começar Agora</a>
                 <img class="img-post1" src="img/Gemini_Generated_Image_nmeksznmeksznmek.png" alt="Pessoa comemorando">
             </article>
         </div>
@@ -146,21 +186,21 @@
                     <span class="card-tag">Dica</span>
                     <h4>Monitore sua evolução</h4>
                     <p>Use o FitTrack para ver como cada treino aproxima você da sua meta semanal.</p>
-                    <a href="#">Veja como</a>
+                    <a href="#meus-treinos">Veja como</a>
                 </div>
 
                 <div class="sidebar-card">
                     <span class="card-tag">Top</span>
                     <h4>Rotinas de treino inteligentes</h4>
                     <p>Descubra treinos curtos, eficientes e adaptados para resultados rápidos.</p>
-                    <a href="#">Confira</a>
+                    <a href="#meus-treinos">Confira</a>
                 </div>
 
                 <div class="sidebar-card" style="border-bottom:none;">
                     <span class="card-tag">Inspiração</span>
                     <h4>Hábitos para manter o foco</h4>
                     <p>Pequenos hábitos diários podem transformar sua disciplina e energia na academia.</p>
-                    <a href="#">Leia mais</a>
+                    <a href="#meus-treinos">Leia mais</a>
                 </div>
             </div>
         </aside>
